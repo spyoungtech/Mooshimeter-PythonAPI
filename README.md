@@ -1,6 +1,9 @@
 # Mooshimeter-PythonAPI
 A python API relying on the BLED112 to talk to the Mooshimeter
 
+[![Build status](https://ci.appveyor.com/api/projects/status/5ajjxonexbaqsu6c/branch/master?svg=true)](https://ci.appveyor.com/project/spyoungtech/mooshimeter-pythonapi/branch/master)
+
+
 # Install
 
 ```

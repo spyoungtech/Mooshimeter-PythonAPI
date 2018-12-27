@@ -4,10 +4,11 @@ setup(
     name='mooshimeter',
     version='0.1.0',
     packages=['mooshimeter', 'mooshimeter.vendor'],
-    url='',
+    url='https://github.com/spyoungtech/Mooshimeter-PythonAPI',
     license='GPLv3',
-    author='',
-    author_email='',
+    author='James Whong',
+    maintainer='Spencer Young',
+    maintainer_email='spencer.young@spyoung.com',
     description='UNOFFICIAL! This package is a fork from the original mooshimeter python API',
     install_requires=['pyserial']
 )
