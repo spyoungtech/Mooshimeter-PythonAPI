@@ -1,4 +1,5 @@
-from Mooshimeter import *
+from mooshimeter.meter import Mooshimeter
+from mooshimeter import bg_wrapper
 import threading
 import time
 
@@ -14,7 +15,7 @@ class InputThread(threading.Thread):
 
 """
 Example.py
-This script is meant to demonstrate use of the Mooshimeter and BGWrapper classes.
+This script is meant to demonstrate use of the Mooshimeter and bg_wrapper classes.
 The script does the following:
 - Scan for BLE devices
 - Filter for Mooshimeters
@@ -51,7 +52,7 @@ class LogWriter(object):
 if __name__=="__main__":
     # Set up the lower level to talk to a BLED112 in port COM4
     # REPLACE THIS WITH THE BLED112 PORT ON YOUR SYSTEM
-    BGWrapper.initialize("COM4")
+    bg_wrapper.initialize("COM4")
     inputthread = InputThread()
     inputthread.start()
     cmd_queue = []
@@ -59,7 +60,7 @@ if __name__=="__main__":
         cmd_queue.append(s)
     inputthread.cb = addToQueue
     # Scan for 3 seconds
-    scan_results = BGWrapper.scan(5)
+    scan_results = bg_wrapper.scan(5)
     # Filter for devices advertising the Mooshimeter service
     results_wrapped = filter(lambda(p):Mooshimeter.mUUID.METER_SERVICE in p.ad_services, scan_results)
     if len(results_wrapped) == 0:
@@ -75,7 +76,7 @@ if __name__=="__main__":
         m.loadTree()
         # Wait for us to load the command tree
         while m.tree.getNodeAtLongname('SAMPLING:TRIGGER')==None:
-            BGWrapper.idle()
+            bg_wrapper.idle()
         # Unlock the meter by writing the correct CRC32 value
         # The CRC32 node's value is written when the tree is received
         m.sendCommand('admin:crc32 '+str(m.tree.getNodeAtLongname('admin:crc32').value))
@@ -103,7 +104,7 @@ if __name__=="__main__":
 
     while True:
         # This call checks the serial port and processes new data
-        BGWrapper.idle()
+        bg_wrapper.idle()
         if time.time()-last_heartbeat_time > 10:
             last_heartbeat_time = time.time()
             for m in meters:

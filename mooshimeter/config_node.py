@@ -1,5 +1,5 @@
 import zlib
-import CArrayWriter
+from mooshimeter import utils
 
 class NTYPE:
     PLAIN   =0  # May be an informational node, or a choice in a chooser
@@ -198,13 +198,13 @@ class ConfigTree(object):
         f.write('} cmd_code_t;\n')
 
         packed = self.pack()
-        CArrayWriter.writeHeader(f,'config_tree_packed',packed)
+        utils.writeHeader(f, 'config_tree_packed', packed)
 
         f.write('extern const unsigned long config_tree_crc32;\n')
     def writeCDec(self,f):
         f.write('#pragma once\n')
         packed = self.pack()
-        CArrayWriter.writeAsCArray(f,'config_tree_packed',packed)
+        utils.writeAsCArray(f, 'config_tree_packed', packed)
 
         crc32 = zlib.crc32(packed)
         # adapt for wart in zlib.crc32... signed ints

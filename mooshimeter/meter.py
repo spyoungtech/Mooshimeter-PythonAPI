@@ -1,14 +1,13 @@
 # coding=UTF-8
-import BGWrapper
-from UUID import *
-from ConfigNode import *
-from BytePack import *
+from mooshimeter import bg_wrapper
+from mooshimeter.config_node import NTYPE, ConfigNode, ConfigTree
+from mooshimeter.utils import BytePack, UnderflowException, UUID
 import binascii
 
-class MeterSerOut(BGWrapper.Characteristic):
+class MeterSerOut(bg_wrapper.Characteristic):
     def __init__(self, meter, parent, handle, uuid):
         """
-        :param other: a BGWrapper.Characteristic
+        :param other: a bg_wrapper.Characteristic
         :return:
         """
         super(MeterSerOut,self).__init__(parent, handle, uuid)
@@ -76,10 +75,10 @@ class MeterSerOut(BGWrapper.Characteristic):
         self.aggregate += b.bytes[1:]
         # Attempt to decode a message, if we succeed pop the message off the byte queue
         self.interpretAggregate()
-class MeterSerIn(BGWrapper.Characteristic):
+class MeterSerIn(bg_wrapper.Characteristic):
     def __init__(self, meter, parent, handle, uuid):
         """
-        :param other: a BGWrapper.Characteristic
+        :param other: a bg_wrapper.Characteristic
         :return:
         """
         super(MeterSerIn,self).__init__(parent, handle, uuid)
@@ -132,7 +131,7 @@ class Mooshimeter(object):
     def __init__(self, peripheral):
         """
         Initialized instance variables
-        :param peripheral: a BGWrapper.Peripheral instance
+        :param peripheral: a bg_wrapper.Peripheral instance
         :return:
         """
         self.p = peripheral
@@ -221,7 +220,7 @@ class Mooshimeter(object):
             wrap[0]+=1
         self.meter_serout.enableNotify(True,tmp_cb)
     def disconnect(self):
-        BGWrapper.disconnect(self.p.conn_handle)
+        bg_wrapper.disconnect(self.p.conn_handle)
     def getUUIDString(self):
         return self.p.getUUIDString()
     def attachCallback(self,node_path,notify_cb):

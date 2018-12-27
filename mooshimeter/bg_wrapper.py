@@ -1,7 +1,7 @@
-import bglib
+from mooshimeter.vendor import bglib
 import serial
 import time
-from UUID import *
+from mooshimeter.utils import UUID
 
 # This module is designed to be used like a singleton class
 # It wraps the functions of bglib in an easier to use way
