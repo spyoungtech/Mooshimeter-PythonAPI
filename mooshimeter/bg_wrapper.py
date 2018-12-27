@@ -126,7 +126,7 @@ class Peripheral(object):
             if c.uuid == uuid:
                 rval.append(c.handle)
         if len(rval) != 1:
-            raise
+            raise Exception('Expected rval length to be exactly 1. Was %d length' % len(rval))
         return rval[0]
     def readByHandle(self,char_handle):
         return read(self.conn_handle,char_handle)
