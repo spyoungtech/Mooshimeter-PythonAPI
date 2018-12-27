@@ -1,0 +1,31 @@
+install:
+  - ps: |
+      py -2.7 -m virtualenv venv
+      .\venv\Scripts\activate.ps1
+      python -m pip install --upgrade pip
+      python -m pip install --upgrade .
+
+
+build_script:
+  - ps: |
+      .\venv\Scripts\activate.ps1
+      python setup.py sdist bdist_wheel
+
+artifacts:
+  - name: dist
+    path: dist\*
+
+test: off
+
+deploy_script:
+  - ps: |
+      if ($env:APPVEYOR_REPO_TAG -eq "true") {
+        py -2.7 -m virtualenv deploy_venv
+        .\deploy_venv\Scripts\activate.ps1
+        python -m pip install --upgrade pip
+        pip install --upgrade wheel
+        pip install --upgrade twine
+        twine upload dist\*
+      } else {
+        echo "Skipping Deploy Because this is not a tagged commit"
+      }

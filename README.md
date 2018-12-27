@@ -1,6 +1,13 @@
 # Mooshimeter-PythonAPI
 A python API relying on the BLED112 to talk to the Mooshimeter
 
+# Install
+
+```
+pip install mooshimeter
+```
+
+
 Example.py:
 This script is meant to demonstrate use of the Mooshimeter and BGWrapper classes.
 The script does the following:

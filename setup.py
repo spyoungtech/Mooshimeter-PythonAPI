@@ -2,12 +2,12 @@ from setuptools import setup
 
 setup(
     name='mooshimeter',
-    version='1.0',
+    version='0.1.0',
     packages=['mooshimeter', 'mooshimeter.vendor'],
     url='',
     license='GPLv3',
-    author='James Whong',
+    author='',
     author_email='',
-    description='',
+    description='UNOFFICIAL! This package is a fork from the original mooshimeter python API',
     install_requires=['pyserial']
 )
