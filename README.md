@@ -10,6 +10,9 @@ A python API relying on the BLED112 to talk to the Mooshimeter
 pip install mooshimeter
 ```
 
+**NOTE:** This package is maintained unofficially.  
+It has no official connection to the [official Mooshim repository](https://github.com/mooshim/Mooshimeter-PythonAPI).
+
 
 Example.py:
 This script is meant to demonstrate use of the Mooshimeter and BGWrapper classes.
